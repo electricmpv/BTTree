@@ -1,9 +1,42 @@
+/*
+{
+ Base configuration. Do not edit this field.
+
+  "extends": "./temp/tsconfig.cocos.json",
+
+ Add your custom configuration here.
+
+  "compilerOptions": {
+    "strict": false
+  }
+}
+*/
 {
   /* Base configuration. Do not edit this field. */
   "extends": "./temp/tsconfig.cocos.json",
 
   /* Add your custom configuration here. */
   "compilerOptions": {
-    "strict": false
-  }
+    "target": "ES6",              // 设定编译后的JavaScript目标版本
+    "module": "commonjs",         // 设定模块系统，Cocos Creator常用的模块系统
+    "lib": ["dom", "es2015"],     // 包含 dom 和 es2015 库
+    "strict": true,               // 开启严格模式，保证类型检查更严格
+    "esModuleInterop": true,      // 允许默认导入非es模块
+    "skipLibCheck": true,         // 跳过库的类型检查，加快编译速度
+    "forceConsistentCasingInFileNames": true, // 强制文件名一致性
+    "noImplicitAny": true,        // 禁止隐式的 `any` 类型
+    "noUnusedLocals": true,       // 检查未使用的局部变量
+    "noUnusedParameters": true,   // 检查未使用的函数参数
+    "resolveJsonModule": true     // 允许导入JSON模块
+  },
+
+  /* Include and exclude files */
+  "include": [
+    "assets/**/*",  // 你的源代码目录
+    "temp/**/*"  // 可能包含的临时或构建目录
+  ],
+  "exclude": [
+    "node_modules", // 排除 node_modules 目录
+    "build"         // 排除构建目录
+  ]
 }

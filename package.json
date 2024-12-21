@@ -3,5 +3,14 @@
   "uuid": "c5cdae34-7f37-4d4e-94bf-a76cba36976d",
   "creator": {
     "version": "3.8.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "typescript-eslint": "^8.18.1"
   }
 }
