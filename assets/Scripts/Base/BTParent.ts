@@ -1,4 +1,5 @@
 import BTNode from "db://assets/Scripts/Base/BTNode";
+import { NodeStatus } from "db://assets/Scripts/Enum";
 
 export default abstract class BTParent extends BTNode {
   childrens: Array<BTNode> = [];
@@ -13,5 +14,9 @@ export default abstract class BTParent extends BTNode {
   constructor(childrens: Array<BTNode>) {
     super();
     this.childrens = childrens;
+  }
+
+  decorate(status: NodeStatus) {
+    return status;
   }
 }
