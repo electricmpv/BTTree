@@ -7,7 +7,33 @@ export default class CompositeSequence extends BTComposite {
     this.index = 0;
   }
 
-  onUpdate() {
+  canExecute(): boolean {
+    return (
+      this.index < this.childrens.length && this.status !== NodeStatus.Failure
+    );
+  }
+  onChildExecuted(status: NodeStatus): void {
+    switch (status) {
+      case NodeStatus.Success:
+        this.index++;
+        if (this.index >= this.childrens.length) {
+          this.status = NodeStatus.Success;
+        } else {
+          this.status = NodeStatus.Running;
+        }
+        break;
+      case NodeStatus.Failure:
+        this.status = NodeStatus.Failure;
+        break;
+      case NodeStatus.Running:
+        this.status = NodeStatus.Running;
+        break;
+      default:
+        break;
+    }
+  }
+
+  /*onUpdate() {
     if (this.status === NodeStatus.Failure) {
       return NodeStatus.Failure;
     }
@@ -26,5 +52,5 @@ export default class CompositeSequence extends BTComposite {
     }
 
     return NodeStatus.Running;
-  }
+  }*/
 }

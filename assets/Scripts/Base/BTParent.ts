@@ -15,6 +15,8 @@ export default abstract class BTParent extends BTNode {
     super();
     this.childrens = childrens;
   }
+  abstract canExecute(): boolean;
+  abstract onChildExecuted(status: NodeStatus): void;
 
   decorate(status: NodeStatus) {
     return status;
