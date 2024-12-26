@@ -25,6 +25,31 @@ export default class CompositeRandomSelector extends BTComposite {
       ];
     }
   }
+
+  canExecute(): boolean {
+    return !!this.executionOrder.length && this.status !== NodeStatus.Success;
+  }
+  onChildExecuted(status: NodeStatus): void {
+    switch (status) {
+      case NodeStatus.Success:
+        this.status = NodeStatus.Success;
+        break;
+      case NodeStatus.Failure:
+        this.executionOrder.pop();
+        if (!this.executionOrder.length) {
+          this.status = NodeStatus.Failure;
+        } else {
+          this.status = NodeStatus.Running;
+        }
+        this.status = NodeStatus.Failure;
+        break;
+      case NodeStatus.Running:
+        this.status = NodeStatus.Running;
+        break;
+      default:
+        break;
+    }
+  }
   /*    shuffle() {
           this.executionOrder = [];
           const indexList = Array.from(
@@ -38,7 +63,7 @@ export default class CompositeRandomSelector extends BTComposite {
           }
       }*/
 
-  onUpdate() {
+  /* onUpdate() {
     if (this.status === NodeStatus.Success) {
       return NodeStatus.Success;
     }
@@ -57,5 +82,5 @@ export default class CompositeRandomSelector extends BTComposite {
     }
 
     return NodeStatus.Running;
-  }
+  }*/
 }
